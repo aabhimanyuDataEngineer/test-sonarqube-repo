@@ -15,6 +15,12 @@ jobs:
           command: tox -e py
       
       - run:
+          name: move coverage.xml to /tmp location
+          command: |
+            mkdir -p /tmp/core-artifact
+            cp coverage.xml /tmp/core-artifact
+
+      - run:
           name: SonarCloud Scan
           command: |
             # Replace $SONAR_TOKEN with your actual SonarCloud token
@@ -23,6 +29,9 @@ jobs:
       - run:
           name: Install dependencies and build project
           command: python3 dazn_assignment.py
+      
+      - store_artifacts:
+          path: /tmp/core-artifact
 
       - sonarcloud/scan
 
