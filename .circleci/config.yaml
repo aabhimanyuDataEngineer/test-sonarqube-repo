@@ -1,0 +1,21 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies and build project
+          command: python3 test-records.py 
+      - sonarcloud/scan
+
+orbs:
+  sonarcloud: sonarsource/sonarcloud@2.0.0
+
+workflows:
+  main:
+    jobs:
+      - build:
+          context: SonarCloud
