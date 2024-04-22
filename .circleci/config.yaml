@@ -7,8 +7,23 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install tox and any other packages
+          command:  pip install tox
+      
+      - run:
+          name: Run tox
+          command: tox -e py
+      
+      - run:
+          name: SonarCloud Scan
+          command: |
+            # Replace $SONAR_TOKEN with your actual SonarCloud token
+            SONAR_TOKEN= 584dd25c69dcf2e0d1123b66194b34c84f30dc3f tox -e py
+      
+      - run:
           name: Install dependencies and build project
-          command: python3 test-records.py 
+          command: python3 dazn_assignment.py
+
       - sonarcloud/scan
 
 orbs:
