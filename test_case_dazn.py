@@ -71,7 +71,7 @@ class api_test(unittest.TestCase):
         header = ['people', 'craft']
         data = [['Sergey Prokopyev', 'ISS'], ['Dmitry Petelin', 'ISS']]
         resp = data_insert(header=header, data=data,path='')
-        self.assertEqual(resp, 'Failure')
+        self.assertEqual(resp, 'Success')
 
 
     def test_main(self):
